@@ -8,6 +8,7 @@ alpha = 0.5 # taxa de aprendizado
 gamma = 0.9 # fator de desconto
 epsilon = 0.2 # chance de explorar
 # Inicializa a Tabela Q
+
 q_table = {
     'seco': {'regar': 0.0, 'pouca_agua': 0.0, 'nao_regar': 0.0},
     'ideal': {'regar': 0.0, 'pouca_agua': 0.0, 'nao_regar': 0.0},
@@ -31,23 +32,25 @@ def transicao(estado, acao):
 # Função de recompensa
 def recompensa(estado, acao):
     if estado == 'seco':
-        if acao == 'regar': return 5
-        elif acao == 'pouca_agua': return 2
-        else: return -1
+        if acao == 'regar': return 10
+        elif acao == 'pouca_agua': return 3
+        else: return -10
     elif estado == 'ideal':
-        if acao == 'nao_regar': return 5
-        elif acao == 'pouca_agua': return 2
-        else: return -3
+        if acao == 'nao_regar': return 10
+        elif acao == 'pouca_agua': return 15
+        else: return -10
     elif estado == 'encharcado':
-        if acao == 'nao_regar': return 2
-        elif acao == 'pouca_agua': return -1
-        else: return -5
+        if acao == 'nao_regar': return 10
+        elif acao == 'pouca_agua': return -5
+        else: return -15
 
 # Registro para exibir evolução
 historico = []
 
 # Episódios de simulação
-for episodio in range(1, 51):
+# Sim o agente possui mais acoes ruins
+
+for episodio in range(1, 201):
     estado = random.choice(['seco', 'ideal', 'encharcado'])
     for passo in range(1): # Um passo por episódio (simplificação)
         if random.random() < epsilon:
@@ -71,9 +74,10 @@ for episodio in range(1, 51):
                     'Q(s,a)': round(q_novo, 2)
                     })
     estado = prox_estado # avança para o próximo estado
+
 # Mostra a tabela final de Q-values
 q_df = pd.DataFrame(q_table).T
-display(q_df.style.background_gradient(cmap="YlGn"))
+print(q_df)
 # Mostra histórico das decisões
 historico_df = pd.DataFrame(historico)
 display(historico_df.tail(10))
