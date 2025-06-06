@@ -48,7 +48,7 @@ def recompensa(estado, acao):
         if acao == 'regar':
             return 10
         elif acao == 'pouca_agua':
-            return 3
+            return 1
         else:
             return -10
     
@@ -113,9 +113,10 @@ def criar_interface():
 
     titulo_frame = tk.Frame(janela, bg="#000")
     titulo_frame.pack(pady=10)
-    tk.Label(titulo_frame, text=" X ", font=("Arial Bold", 18), bg="#000", fg="#FF0000").pack(side="left")
+    # tk.Label(titulo_frame, text=" X ", font=("Arial Bold", 18), bg="#000", fg="#FF0000").pack(side="left")
     tk.Label(titulo_frame, text="Fork na ", font=("Arial", 18, "bold"), bg="#000", fg="#fff").pack(side="left")
-    tk.Label(titulo_frame, text="main", font=("Arial Bold", 18), bg="#FF9900", fg="#000").pack(side="left")
+    tk.Label(titulo_frame, text="Main ", font=("Arial Bold", 18, "bold"), bg="#000", fg="#fff").pack(side="left")
+    tk.Label(titulo_frame, text="System", font=("Arial Bold", 18, "bold"), bg="#E58B04", fg="#000").pack(side="left")
 
     param_frame = tk.Frame(janela, bg="#000")
     param_frame.pack(pady=10)
@@ -190,9 +191,9 @@ def criar_interface():
         for linha in hist_df.values.tolist():
             tabela_hist.insert("", "end", values=linha)
 
-    botao_reexecutar = tk.Button(janela, text="\u25B6 Executar", font=("Arial", 14, "bold"), bg="#F77103", fg="#fff",
-                                 activebackground="#FF9900", padx=12, pady=6, command=executar)
-    botao_reexecutar.pack(pady=15)
+    botao_reexecutar = tk.Button(janela, text="\u25B6", font=("Arial", 14, "bold"), bg="#E58B04", fg="#fff",
+                                 activebackground="#C47806", padx = 12, pady = 6, height = 5, width = 5, command=executar)
+    botao_reexecutar.pack(pady=(10, 10))
 
     janela.mainloop()
 
